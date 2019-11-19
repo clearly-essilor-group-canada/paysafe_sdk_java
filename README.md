@@ -24,4 +24,12 @@ Samples are displayed herein. Sample configuration is currently using properties
 
 Modifying these settings will change settings in this environment.
 
+# Deploy Maven artifact to our internal Nexus repository
+
+From the `PaysafeSDK` folder, run the following command:
+```
+./gradlew clean build publish -PclearlyNexusUsername=yourusername -PclearlyNexusPassword=yourpassword
+```
+Where the username (`clearlyNexusUsername`) and the password (`clearlyNexusPassword`) have to be passed as arguments.
+
 

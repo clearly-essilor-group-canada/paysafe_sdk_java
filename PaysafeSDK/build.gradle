@@ -1,38 +1,65 @@
+plugins {
+    id 'maven-publish'
+}
+
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'eclipse'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+publishing {
+    repositories {
+        maven {
+			name 'clearly-nexus'
+            url = "https://repo.coastalcontacts.com/repository/maven-3rd-party"
+            credentials {
+                username "${clearlyNexusUsername}"
+                password "${clearlyNexusPassword}"
+            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.paysafe'
+            artifactId = 'paysafe-sdk-java'
+            version = jar.version
+            artifact("build/libs/$jar.baseName-$version"+".jar") {
+                
+            }
+        }
+    }
 }
 
 jar {
-	baseName = 'PaysafeSDK'
-	version = "1.0"
+    baseName = 'PaysafeSDK'
+    version = "1.0.1-clearly"
 }
 
 sourceCompatibility = 1.6
 
 dependencies {
-	compile group: 'com.google.code.gson', name: 'gson', version: '2.2.2+'
-	testCompile group: 'junit', name: 'junit', version: '4.+'
-	testCompile group: 'com.google.code.gson', name: 'gson', version: '2.2.2+'
-	checkstyle 'com.puppycrawl.tools:checkstyle:6.1'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.2.2+'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile group: 'com.google.code.gson', name: 'gson', version: '2.2.2+'
+    checkstyle 'com.puppycrawl.tools:checkstyle:6.1'
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.0'
+    gradleVersion = '2.0'
 }
 
 checkstyle {
-	ignoreFailures = true
-	sourceSets = [sourceSets.main]
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
 }
 
-test{
-	include "sdk/test/*"
+test {
+    include "sdk/test/*"
 
-	reports.html.destination = "$buildDir/reports/tests/"
+    reports.html.destination = "$buildDir/reports/tests/"
 }
 
 allprojects {
