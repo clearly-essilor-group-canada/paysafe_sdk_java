@@ -3,6 +3,8 @@ subprojects {
    apply plugin : "eclipse"
    
    repositories {
-      mavenCentral()
+      maven {
+         url "https://repo.coastalcontacts.com/repository/maven-public"
+      }
    }
 }

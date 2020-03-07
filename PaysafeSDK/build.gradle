@@ -7,7 +7,9 @@ apply plugin: 'checkstyle'
 apply plugin: 'eclipse'
 
 repositories {
-    mavenCentral()
+    maven {
+        url "https://repo.coastalcontacts.com/repository/maven-public"
+    }
 }
 
 publishing {
@@ -35,7 +37,7 @@ publishing {
 
 jar {
     baseName = 'PaysafeSDK'
-    version = "1.0.1-clearly"
+    version = "1.0.2-clearly"
 }
 
 sourceCompatibility = 1.6

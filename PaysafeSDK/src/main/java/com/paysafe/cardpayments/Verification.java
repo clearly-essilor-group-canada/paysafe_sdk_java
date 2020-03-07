@@ -545,6 +545,9 @@ public final void setStoredCredentials(StoredCredential storedCredential) {
       if (null != cardBuilder) {
         verification.setCard(cardBuilder.build());
       }
+      if (null != profileBuilder) {
+        verification.setProfile(profileBuilder.build());
+      }
       if (null != billingDetailsBuilder) {
         verification.setBillingDetails(billingDetailsBuilder.build());
       }
