@@ -67,6 +67,7 @@ public class Authorization implements BaseDomainObject {
   private String authCode;
   
   /** The profile. */
+  @Expose
   private Profile profile;
   
   /** The billing details. */
@@ -738,6 +739,9 @@ public final void setStoredCredentials(StoredCredential storedCredential) {
     
     /** The billing details builder. */
     private BillingDetails.BillingDetailsBuilder<AuthorizationBuilder> billingDetailsBuilder;
+
+    /** The profile builder. */
+    private Profile.ProfileBuilder<AuthorizationBuilder> profileBuilder;
     
     /** The shipping details builder. */
     private ShippingDetails.ShippingDetailsBuilder<AuthorizationBuilder> shippingDetailsBuilder;
@@ -769,6 +773,9 @@ public final void setStoredCredentials(StoredCredential storedCredential) {
       }
       if (null != billingDetailsBuilder) {
         authorization.setBillingDetails(billingDetailsBuilder.build());
+      }
+      if (null != profileBuilder) {
+        authorization.setProfile(profileBuilder.build());
       }
       if (null != shippingDetailsBuilder) {
         authorization.setShippingDetails(shippingDetailsBuilder.build());
@@ -863,6 +870,19 @@ public final void setStoredCredentials(StoredCredential storedCredential) {
                         AuthorizationBuilder>(this);
       }
       return authenticationBuilder;
+    }
+
+    /**
+     * Build a profileBuilder within this authorization.
+     *
+     * @return Profile.ProfileBuilder<AuthorizationBuilder>
+     */
+    public final Profile.ProfileBuilder<AuthorizationBuilder> profile() {
+      if (null == profileBuilder) {
+        profileBuilder = new Profile.ProfileBuilder<
+                AuthorizationBuilder>(this);
+      }
+      return profileBuilder;
     }
 
     /**

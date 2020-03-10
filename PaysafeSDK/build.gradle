@@ -37,7 +37,7 @@ publishing {
 
 jar {
     baseName = 'PaysafeSDK'
-    version = "1.0.2-clearly"
+    version = "1.0.3-clearly"
 }
 
 sourceCompatibility = 1.6
